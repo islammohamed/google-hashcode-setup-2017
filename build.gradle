@@ -10,7 +10,7 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 
-apply plugin:'application'
+apply plugin: 'application'
 mainClassName = "org.example.App"
 
 // In this section you declare where to find the dependencies of your project
@@ -38,7 +38,7 @@ task srcZip(type: Zip, dependsOn: tasks.build) {
 }
 
 task generateOutputs(type: JavaExec, dependsOn: tasks.build) {
-    args ("input/*")
+    args("input/kittens.in")
     description = "Hashcode output generation"
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath
@@ -47,4 +47,4 @@ task generateOutputs(type: JavaExec, dependsOn: tasks.build) {
 task submit << {
     println "Files ready to be submitted"
 }
-tasks.submit.dependsOn (tasks.srcZip, tasks.generateOutputs)
+tasks.submit.dependsOn(tasks.srcZip, tasks.generateOutputs)
