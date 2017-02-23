@@ -31,3 +31,20 @@ dependencies {
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
 }
+
+task srcZip(type: Zip, dependsOn: tasks.build) {
+    classifier = 'src'
+    from sourceSets*.allSource
+}
+
+task generateOutputs(type: JavaExec, dependsOn: tasks.build) {
+    args ("inputs/*")
+    description = "Hashcode output generation"
+    main = project.mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task submit << {
+    println "Files ready to be submitted"
+}
+tasks.submit.dependsOn (tasks.srcZip, tasks.generateOutputs)
