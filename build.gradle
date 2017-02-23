@@ -38,7 +38,7 @@ task srcZip(type: Zip, dependsOn: tasks.build) {
 }
 
 task generateOutputs(type: JavaExec, dependsOn: tasks.build) {
-    args ("inputs/*")
+    args ("input/*")
     description = "Hashcode output generation"
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath
